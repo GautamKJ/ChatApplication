@@ -1,0 +1,601 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* CSS */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    
+}
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+}
+.container{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f7f7f7;
+}
+.box{
+   border-radius: 10px;
+   padding: 1px;
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+    background-color: white;
+    box-shadow: 0 0 128px 0 rgba(228, 12, 12),
+        0 0 32px 64px -48px rgba(174, 166, 166, 0.5);
+    
+}
+#login_box{
+    
+    display: flex;
+    margin: 5%;
+    margin-top: 4%;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+}
+#login_box div{
+    width: 100%;
+}
+#login_box input{
+    margin: 1%;
+    padding: 1%;
+    border-radius: 5px;
+    width: 90%;
+    
+}
+#login{
+    
+    color: white;
+    
+    /* border-radius: 7px; */
+    background-color: blue;
+    border: transparent;   
+    cursor: pointer;
+
+}
+
+a{
+    text-decoration: none;
+    
+}
+
+#register_submit{
+    color: white;
+    border: transparent;
+    border-radius: 8px;
+    width: 80%;
+    background-color: blue;
+    cursor: pointer;
+}
+
+#file{
+    cursor: pointer;
+}
+
+.bigbox{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(#141e30, #243b55);
+}
+.smallbox{
+    border-radius: 10px;
+    padding: 1px;
+    display: grid;
+    grid-template-columns: auto 70%;
+    width: 90vw;
+    height: 90vh;
+    background-color: white;
+    box-shadow: 0 0 128px 0 rgba(228, 12, 12),
+        0 0 32px 64px -48px rgba(174, 166, 166, 0.5);
+    
+        
+}
+.side{
+    background-color: whitesmoke;
+    padding: 5px;
+    height: inherit;
+    border: solid  cornflowerblue 4px;
+    border-radius: 5px;
+}
+
+.message{
+    position: relative;
+    background: linear-gradient(#141e30, #243b55);
+    border-radius: 3px;
+    border: solid  white 4px;
+    border-radius: 5px;
+}
+.about{
+    height: 12vh;
+    position: relative;
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 5px;
+    border-radius: 5px;
+    background: #0000ff;
+    box-shadow: 5px 5px 10px 3px white;
+    margin-bottom: 2%;
+}
+.searchchat{
+    height: 5vh;
+}
+.logout{
+   float: right;
+}
+.menu{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+#option{
+    
+    float: right;
+    clear: both;
+    cursor: pointer;
+}
+.image{
+    display: flex;
+    align-items: center;
+    margin-top: .3rem;
+    margin-right: 1%;
+    /* position: absolute;   */
+}
+#photo {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: solid white 2px;
+    
+}
+
+.message_container{
+    /* overflow: scroll; */
+    cursor: pointer;
+    
+    max-height:  77vh;
+    
+    overflow: auto;
+    
+}
+
+
+.item1{
+    background-color: white;
+    margin: 2%;
+    height: max-content;
+    display: grid;
+    grid-template-rows:2fr -1fr;
+    grid-template-columns:1fr 2fr;
+    border-top: solid grey 1px;
+    box-shadow: 3px 2px 5px 1px white;
+}
+.user_detail{
+    
+}
+.naam{
+    display: flex;
+    margin-left: 2%;
+    /* justify-content: center; */
+    align-items: center;
+
+}
+#user_img{
+    
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: solid white 2px;
+
+}
+.getmessage{
+    margin-left: 5%;
+    grid-column: 1/-1;
+    font-family: cursive;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap ;
+    
+}
+.hello{
+    text-align: end;
+}
+.about_name{
+    display: flex;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+    
+}
+#search{
+    padding: 4px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.left{
+    float: left;
+    clear: both;
+    background-color: azure
+    
+}
+.right{
+    float: right;
+    clear: both;
+    background-color: beige;
+    color: black;    
+}
+.user_message {
+    margin: 10px;
+    border-radius: 10px;
+    padding: 5px;
+    max-width: 240px;
+    word-wrap: break-word;
+}
+
+#type{
+  
+    display: flex;
+    /* position: absolute; */
+    bottom: 0;
+    padding: 4px;
+    width: 100%;
+    height: 6vh;
+    background: whitesmoke;
+}
+#msg{
+    padding: 3px;
+    margin-right: 1%;
+    width: 84vw;
+    margin-left: 1%;
+}
+#send{
+  
+   background-color: inherit;
+    border: transparent;
+    cursor: pointer;
+    width: 15%;
+}
+.fa-paper-plane{
+    
+    font-size: 175%;
+    color:  #0000ff;
+    
+}
+.msg_container{
+    max-height:  71vh;
+    overflow: auto;
+        
+    height: 71vh;
+}
+.towhom{
+    height: 12vh;
+    border-bottom: 2px solid gray;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    background: #0000ff;
+}
+.fa-bars {
+    display: block;
+}
+.myLinks a {
+    display: block;
+}
+.myLinks {
+    position: absolute;
+    background-color: white;
+    border: solid 2px black;
+    display: none;
+    bottom: -60px;
+    left: -20px; 
+}
+
+/* ----------------------------LOGIN------------------------------- */
+
+html {
+  height: 100%;
+}body{
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(#141e30, #243b55);
+ 
+}
+.login-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,.5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  border-radius: 10px;
+}
+.login-box h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+}
+
+.login-box .user-box {
+  position: relative;
+}
+
+.login-box .user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+.login-box .user-box label {
+  position: absolute;
+  top:0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  pointer-events: none;
+  transition: .5s;
+}
+.login-box form button {
+  /* margin-left: 30px; */
+  position: relative;
+  display: inline-block;
+  padding: 10px 10px;
+  color: #03e9f4;
+  font-size: 8px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: .5s;
+  margin-top: 40px;
+  letter-spacing: 4px;
+  width: 100%;
+  border:solid;
+  border-radius:10px;
+  background:black;
+}
+.login-box button:hover {
+  background: #03e9f4;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #4bedb2,
+              0 0 25px #4bedb2,
+              0 0 50px #4bedb2,
+              0 0 100px  #4bedb2;
+}
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #03e9f4;
+  font-size: 12px;
+}
+
+.info{
+color:white;
+font-size: .98rem;
+}
+a{
+text-decoration: none;
+color:blue;
+}
+
+#togglePassword{
+  position: absolute;
+  right: 5px;
+  color: white;
+}
+/* --------------------------------------------------------Login end---------------------------------------------- */
+
+/* ---------------------------------------------Register start---------------------------------------- */
+
+html {
+  height: 100%;
+}body{
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(#141e30, #243b55);
+ 
+}
+.login-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,.5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  border-radius: 10px;
+  height: max-content;
+}
+.login-box h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+}
+
+.login-box .user-box {
+  position: relative;
+}
+
+.login-box .user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  /* margin-bottom: 30px; */
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+.login-box .user-box label {
+  position: absolute;
+  top:0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  pointer-events: none;
+  transition: .5s;
+}
+.login-box form button {
+  width: 97%;
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #03e9f4;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: 1.0s;
+  letter-spacing: 4px
+  
+}
+.user-image{
+  width: 100%;
+ 
+  font-size: 16px;
+  color: #fff;
+ 
+  border: none;
+  
+  outline: none;
+  background: transparent;
+}
+#img{
+  width: 100%;
+  font-size: 16px;
+  color: #fff;
+}
+.login-box button:hover {
+  background: #03e9f4;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #4bedb2,
+              0 0 25px #4bedb2,
+              0 0 50px #4bedb2,
+              0 0 100px  #4bedb2;
+}
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #03e9f4;
+  font-size: 12px;
+}
+
+.alreadyReg{
+color: white;
+}
+/* ------------------------------Register end------------------------------------------------------- */
+@media screen and (max-width: 750px){
+    .box{
+        padding: 18px;
+        width: 70%;
+    }
+
+    .smallbox{
+        width: 100vw;
+        display: block;
+        background-color:#f7f7f7;
+        height:inherit;
+
+    }
+    /* .side{
+        display: block;
+
+    } */
+    .message_container {
+        max-height: 100vh;
+    }
+    /* .message{
+        display: none;
+    } */
+    .about{
+        /* position: fixed; */
+        width: 96vw;
+        
+    }
+    .msg_container{
+        
+        max-height: 80vh;
+        height: 80vh;
+    }
+   #msg{
+    border-radius: 20px;
+   }
+   .fa-arrow-left{
+    color: white;
+    margin-right: 3%;
+    margin-left: 3%;
+   }
+   .login-box {
+    width: 300px;
+   }
+}
