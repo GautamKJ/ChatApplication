@@ -4,7 +4,7 @@ import ChatContext from '../context/chatContext';
 const Login = () => {
 
   const user=useContext(ChatContext);
-  const {user_name,setUser_name,friendChat}=user;
+  const {user_name,setUser_name,setImg,friendChat,setimgurl,imgurl}=user;
 
   
   let navigate=useNavigate();
@@ -59,9 +59,13 @@ const onsubmit= async(e)=>{
           navigate("/chat");
           
       }
-
+       
+    await  setImg(credentials.email);
+      console.log("1334657987656223121255")
+       friendChat();
       setcredentials({email:"",password:""});
-      friendChat();
+      
+      
     
   } catch (error) {
     console.log (error);

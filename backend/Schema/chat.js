@@ -19,6 +19,7 @@ const chatSchema= new Schema({
             conversationId: { type: String},
             senderEmail: { type: String,  },
             text: { type: String},
+            iv:{type:Buffer},
             Date:{
                 type:Date,
                 default:new Date()

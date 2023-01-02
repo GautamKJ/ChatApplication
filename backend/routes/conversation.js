@@ -5,21 +5,65 @@ const router=express.Router();
 const {body,validationResult} =require('express-validator');
 const fetchuser= require('../middleware/fetchuser');
 
+// crypto module
+const crypto = require("crypto");
+
+const algorithm = "aes-256-cbc"; 
+
+// generate 16 bytes of random data
+
+
+
+// protected data
+
+// secret key generate 32 bytes of random data
+const Securitykey = "@s!8h0ie2#89m-_=~g>{p6./R02A#srk";
+
+
 // Route fetch all message at /api/chat/fetchmessage
 
 router.post('/fetchmessage/:id',fetchuser, async (req,res)=>{
     try {
-        
+        console.log(req.params.id);
         let msg= await Chat.findById(req.params.id);
         let chatDet=[{}];
-        // for(let i=0;i<msg.message.length;i++){
-        //     msg.message[i]=msg.message[i].split("\n")[0];
-        // //     `chatDet({
-        // //         YoursEmail:YoursEmail,
-        // //         FriendEmail:FriendEmail
-        // //  `   })
-        // }
-        res.json(msg.message);
+
+// the decipher function
+
+        let msgArray=[{
+            conversationId:"",
+            senderEmail:"",
+            text:"",
+            iv:"",
+            Date:""
+        }];
+          // the decipher function
+          
+
+        for(let i=0;i<msg.message.length;i++){
+            // console.log(msg.message[i]);
+            let iv=msg.message[i].iv;
+            let decipher = crypto.createDecipheriv(algorithm, Securitykey, iv);
+            let decryptedData = decipher.update(msg.message[i].text, "hex", "utf-8");
+
+            decryptedData += decipher.final("utf8");
+
+            msgArray.push({
+                conversationId:msg.message[i].conversationId,
+                senderEmail:msg.message[i].senderEmail,
+                text:decryptedData,
+                iv:msg.message[i].iv,
+                Date:msg.message[i].Date
+             });
+
+        }
+        
+// const decipher = crypto.createDecipheriv(algorithm, Securitykey, initVector);
+
+// let decryptedData = decipher.update(message, "hex", "utf-8");
+
+// decryptedData += decipher.final("utf8");
+        res.json(msgArray);
     } catch (error) {
         console.error(error.message);
         res.status(500).json("Some error found");
@@ -38,7 +82,7 @@ router.post('/fetchfriend',fetchuser, async (req,res)=>{
 
         // console.log(user[0].email);
         let myself=await User.find({email:user[0].email});
-        // console.log("==============   "+myself);
+        console.log("==============   "+myself);
             user1=myself[0].name;
 
         let displayContact=[{
@@ -47,6 +91,7 @@ router.post('/fetchfriend',fetchuser, async (req,res)=>{
             id:"",
             name:"",
             message:"",
+            image:user[0].image,
             user2Email:""
         }];
     //    console.log("hereereefe");
@@ -66,20 +111,28 @@ let myName;
                let em=flastmsg[i].YoursEmail;
                 naam=await User.find({email:em});
                 
+                console.log("24823u89ru23wfhasjfdvhfj ",messlength) ;
             //    console.log("naam "+naam);
                 
-               
+                    // the decipher function
+                    let iv=flastmsg[i].message[messlength-1].iv;
+            let decipher = crypto.createDecipheriv(algorithm, Securitykey, iv);
+                    
+
+            let decryptedData = decipher.update(flastmsg[i].message[messlength-1].text, "hex", "utf-8");
+
+            decryptedData += decipher.final("utf8");
+
             displayContact.push({
                 Useremail:user[0].email,
                 myName:myName,
                 id:flastmsg[i]._id,
                 name:naam[0].name,
-                message:flastmsg[i].message[messlength-1].text,
+                message:decryptedData,
+                image:naam[0].image,
                 user2Email:em
 
-            }
-                
-                );
+            });
                 
 
             
@@ -88,6 +141,8 @@ let myName;
                 // user2Email:ylastmsg[i].FriendEmail;
                 // console.log("user2Email2  ",user2Email);
                 let myself=await User.find({email:ylastmsg[i].YoursEmail});
+            
+
                 // console.log("==============   "+myself);
                 myName=myself[0].name;
                     let messlength=ylastmsg[i].message.length;
@@ -96,29 +151,33 @@ let myName;
                     naam=await User.find({email:em});
                     // console.log("naam2"+naam+"naam3");
                     // console.log("-------------> ",myName);
+                    console.log("asdfghjkl;  ",messlength) ;
+                    console.log("MSG  ",ylastmsg[i].message[messlength-1]);
+
+                   // the decipher function
+                   let iv=ylastmsg[i].message[messlength-1].iv;
+                   let decipher = crypto.createDecipheriv(algorithm, Securitykey, iv);
+
+                    console.log("decrypt msg ");
+
+                    let decryptedData = decipher.update(ylastmsg[i].message[messlength-1].text, "hex", "utf-8");
+                    console.log("decrypt 124");
+                    decryptedData += decipher.final("utf8");
+                        console.log("decrypt ",decryptedData);
                 displayContact.push(
                     {   Useremail:user[0].email,  
                         myName:myName,
                           id:ylastmsg[i]._id,
                          name:naam[0].name,
-                         message: ylastmsg[i].message[messlength-1].text,
+                         message: decryptedData,
+                         image:naam[0].image,
                          user2Email:em
                         });
                 }
             
             
-    //   console.log("display");
-            
-            // const sortBydate=arr=>{
-            //     const sorter= (a,b)=>{
-            //         return new Date(b.message.split("\n")[1]).getTime()-new Date(a.message.split("\n")[1]).getTime();
-            //     }
-            //     arr.sort(sorter);
-            // }
-            // sortBydate(displayContact);
-            // for(let i=0;i<displayContact.length;i++){
-            //         displayContact[i].message=displayContact[i].message.split("\n")[0];
-            // }
+  
+  
         res.json(displayContact);
         
     }
@@ -138,10 +197,14 @@ router.post('/addmessage',fetchuser,async (req,res)=>{
         let friend=await User.findOne({email:YoursEmail});
         
 // my chat
+let initVector = crypto.randomBytes(16);
+let cipher = crypto.createCipheriv(algorithm, Securitykey, initVector);
        
 // Chat room
+let encryptedData = cipher.update(message, "utf-8", "hex");
+encryptedData += cipher.final("hex");
 let msg=[];
-msg.push(YoursEmail+" :"+ message+ new Date);
+msg.push(YoursEmail+" :"+ encryptedData+ new Date);
 
         let chat = new Chat ({
             // user:req.user.id,
@@ -150,7 +213,8 @@ msg.push(YoursEmail+" :"+ message+ new Date);
             message: {
                 conversationId:'100',
                 senderEmail:YoursEmail,
-                text:message
+                text:encryptedData,
+                iv:initVector
             }
         })
 
@@ -166,7 +230,7 @@ msg.push(YoursEmail+" :"+ message+ new Date);
 
 // Route to chatting at /api/chat/morechat
 
-router.put("/morechat/:id",fetchuser, async (req,res)=>{
+router.put("/morechat/:id", async (req,res)=>{
 
     const {FriendEmail,YoursEmail,message}=req.body;
   
@@ -176,13 +240,19 @@ router.put("/morechat/:id",fetchuser, async (req,res)=>{
     if(!msg){
         return res.status(404).send("Not found");
     }
+    // the cipher function
+    let initVector = crypto.randomBytes(16);
+        let cipher = crypto.createCipheriv(algorithm, Securitykey, initVector);
         // console.log("YoursEmail "+YoursEmail);
+        var encryptedData = cipher.update(message, "utf-8", "hex");
+        encryptedData += cipher.final("hex");
 
     const updatedmsg={};
     msg.message.push({
         conversationId:req.params.id,
         senderEmail:YoursEmail,
-        text:message
+        text:encryptedData,
+        iv:initVector
     })
 
         // console.log("message  ",msg);
@@ -219,7 +289,7 @@ router.post('/getUser',fetchuser,async (req,res)=>{
         console.error(error.message);
         res.status(500).json("Some error found");   
     }
-})
+});
 
 // Get chat room user details
 

@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import {Link,useNavigate} from "react-router-dom";
+import axios from "axios";
 
 const Signup = () => {
 
     let navigate=useNavigate();
-    
+    const [image,setimage]=useState("");
     const [showbtn,updateshowbtn]=useState("far fa-eye");
     const [type,updatetype]=useState("password");
 
@@ -28,23 +29,61 @@ const setDetail=(e)=>{
     setcredentials({...credentials,[e.target.name]:e.target.value});
   }
 
+  const setfile=async(e)=>{
+    console.log("file ");
+    console.log(e.target.files);
+    setimage(e.target.files[0]);
+    try{
+
+    
+    const file=e.target.files[0];
+
+    if(!file){
+      return alert("FIle not exists");
+    }
+    if(file.size>1024*1024)
+    return alert("Too big size");
+    
+
+    }
+    catch(error){
+      console.log(error);
+    }
+  }
+
 const onsubmit= async(e)=>{
-    e.preventDefault();
-    const response=await fetch("http://localhost:8081/api/login/create",{
-        method:"POST",
-        headers:{
-          'content-Type':'application/json',
-        },
-        
-        body:JSON.stringify({name:credentials.name , email:credentials.email, password:credentials.password})
-      });
-      const json= await response.json();
-        console.log(json);
-        if(json.token){
+  e.preventDefault();
+
+  let formData = new FormData();
+   
+  formData.append('file', image);
+  formData.append('name',credentials.name);
+  formData.append('email',credentials.email);
+  formData.append('password',credentials.password);
+
+
+  console.log(formData);
+
+  const response = await axios.post("http://localhost:8081/api/login/create", formData,{
+      
+      headers:{
+        'content-type':'multipart/form-data',
+      },
+      
+      
+    });
+    console.log(" image ",image);
+    // const json= await response.json();
+      console.log(response.data);
+        if(response.data){
+          window.alert("Successfully Added");
             console.log("adfasd");
-            localStorage.setItem('token',json.token);
+            localStorage.setItem('token',response.token);
             navigate("/login");
             
+        }
+        else{
+          window.alert(response.data);
         }
         setcredentials({name:"",email:"",password:""});
     }
@@ -76,8 +115,11 @@ const onsubmit= async(e)=>{
   <i className={showbtn} id="togglePassword" onClick={showPassword}></i>
     <label>Password</label>
   </div>
-  
-  <button type="submit" >Register</button>
+  <div className="user-image">
+      <p id="img">Select image:</p>
+      <input type="file" id="img" name="file" value={credentials.img}  onChange={setfile}  accept="image/*"/>
+  </div>
+  <button type="submit"  >Register</button>
 
   <p className="alreadyReg">Already register? <Link to="/login">Log in</Link></p>
   

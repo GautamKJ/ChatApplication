@@ -5,6 +5,7 @@ const  FriendList=(props)=> {
   const context=useContext(ChatContext);
   const {chat,setclickUser,setuser2Email,mess,back,setback,msglist,setmsglist,click,checkClick}=context;
   const {note,status}=props;
+  console.log("NOTES ",note);
 
 const onclick=(id)=>{
   console.log(id);
@@ -23,7 +24,7 @@ const onclick=(id)=>{
     <>
        <div className="item1"  onClick={()=>{onclick(note.id)}}>
      <div className="user_detail" >
-     <img src="https://static.vecteezy.com/system/resources/previews/008/481/369/original/avatar-cartoon-in-flat-style-png.png" alt='profile' id="user_img"/> 
+     <img src={note.image} alt='profile' id="user_img"/> 
                             {/* <img src='C:\Users\gauta\OneDrive\Documents\ReactJS\ChatQ\frontend\my-app\Design\chat.png' id='user_img'></img> */}
                         </div>
                         <div className="naam">{note.name}</div>

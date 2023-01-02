@@ -4,20 +4,24 @@ const database = require('./db');
 const http = require('http');
 var cors = require('cors');
 const fileupload = require("express-fileupload");
-const port=8081;
+const port=process.env.PORT || 8081;
 var app= express();
 
 
-app.use(fileupload());
+// app.use(fileupload());
 
 app.use(cors())
 
 database();
 app.use(express.json());
+app.use(fileupload({
+  useTempFiles:true
+}));
 
 
-app.use("/api/login",require("./routes/login"))
-app.use("/api/chat",require("./routes/conversation"))
+app.use("/api/login",require("./routes/login"));
+app.use("/api/chat",require("./routes/conversation"));
+app.use("/api/upload",require("./routes/upload"));
 
 let httpServer=http.createServer(app);
 
@@ -56,7 +60,7 @@ const getUser = (userId) => {
 
 io.on("connection", (socket) => {
   //when ceonnect
-  console.log("a user connected.");
+  
 
   //take userId and socketId from user
   // console.log("socket ",socket);
@@ -87,12 +91,7 @@ io.on("connection", (socket) => {
   }
   });
 
-  //when disconnect
-  // socket.on("disconnect", () => {
-  //   console.log("a user disconnected!");
-  //   removeUser(socket.id);
-  //   io.emit("getUsers", users);
-  // });
+ 
 });
 
           

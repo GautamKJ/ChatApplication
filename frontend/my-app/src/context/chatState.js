@@ -11,6 +11,7 @@ const ChatState=(props)=>{
     const[userAdd,newuserAdd]=useState("");
     const[user2Email,setuser2Email]=useState("");
     const[user_name,setUser_name]= useState("");
+    const [imgurl,setimgurl]=useState("");
     const [clickUser,setclickUser]=useState("");
     const [sendMsg,setsendMsg]=useState("");
     const [senderId,setSenderId]=useState("");
@@ -44,18 +45,51 @@ const friendChat= async()=>{
     const json= await response.json();
     console.log("json friendChat ",json);
     updatefrienddetail(json);
-    if(json)
+    if(json){
+        
     
     setUser_name(json[0].myName);
+    
     setuserEmail(json[0].Useremail);
-
+      setimgurl(json[0].image);
+    }
     if(json.length>1){
         setuser2Email(json[1].user2Email);
     }
+    //  setImg(json[0].Useremail);
     
 }
 
+// image
+// const setImg=async(email)=>{
+//     try {
+//         console.log("............. ",email);
+//       const response=await fetch("http://localhost:8081/api/login/getloggeddetail",{
+//         method:"POST",
+//         headers:{
+//           'content-Type':'application/json',
+//         },
+//         body:JSON.stringify({email:email})
+//       });
+//       const json= await response.json();
 
+//       if(json){
+//       console.log("1234567890987654321");
+//       console.log("JSON JSON ",json);  
+  
+//         const str=JSON.stringify(json);
+//         console.log(str);
+//         setimgurl(str)
+       
+//       console.log(imgurl);
+//       }
+      
+//     }
+//     catch(err){
+//       console.log(err);
+//     }
+//   }
+  
 // Establish a room between two user
 
 const createRoom= async (FriendEmail,YoursEmail,message)=>{
@@ -169,7 +203,7 @@ const searchuser= async(email)=>{
     })
     const json = await response.json();
     if(json.length!=0)
-  await  createRoom(userEmail,email,"Create At ");
+  await  createRoom(userEmail,email,"Create At "+new Date());
     await friendChat();
     console.log(json);
     
@@ -178,7 +212,7 @@ const searchuser= async(email)=>{
 
 
     return(
-        <ChatContext.Provider value={{click,checkClick,userAdd,newuserAdd,back,setback,senderId,searchuser,setSenderId,receiverId,setreceiverId,msglist,friendChat,getId,chat,chatting,frienddetail,user_name,setUser_name,mess,userEmail,clickUser,setclickUser,sendMsg,setsendMsg,chatId,user2Email,setuser2Email,updatemsg,setupdatemsg,setMess}}>
+        <ChatContext.Provider value={{click,imgurl,setimgurl,checkClick,userAdd,newuserAdd,back,setback,senderId,searchuser,setSenderId,receiverId,setreceiverId,msglist,friendChat,getId,chat,chatting,frienddetail,user_name,setUser_name,mess,userEmail,clickUser,setclickUser,sendMsg,setsendMsg,chatId,user2Email,setuser2Email,updatemsg,setupdatemsg,setMess}}>
         {props.children}
         </ChatContext.Provider>
 

@@ -5,7 +5,8 @@ import ChatContext from '../context/chatContext';
 const socket=io.connect('http://localhost:8081');
 const Message=(props)=> {
   const {note}=props;
-  // console.log("note  ",note);
+
+  console.log("note  ",note);
   const [count,setcount]=useState(-1);
   const [receivemsg,setreceivemsg]=useState([]);
   let array=[];

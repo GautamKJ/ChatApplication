@@ -7,6 +7,7 @@ import ChatContext from '../context/chatContext';
 import {useNavigate} from "react-router-dom";
 
 const Chat=()=> {
+  document.title = "GauShip";
 
   let navigate=useNavigate();
   // const socket=io.connect('http://localhost:8081');
@@ -17,7 +18,7 @@ const Chat=()=> {
   const [width, setWidth] = useState(window.innerWidth);
   const socket = useRef();
   const [state,setstate]=useState({});
-  const {user_name,chat,userAdd,newuserAdd,click,back,setback,checkClick,friendChat,receiverId,senderId,frienddetail,setUser_name,getId,mess,clickUser,userEmail,user2Email,sendMsg,setsendMsg,chatting,chatId,updatemsg,setupdatemsg,setMess}=user;
+  const {user_name,chat,imgurl,userAdd,newuserAdd,click,back,setback,checkClick,friendChat,receiverId,senderId,frienddetail,setUser_name,getId,mess,clickUser,userEmail,user2Email,sendMsg,setsendMsg,chatting,chatId,updatemsg,setupdatemsg,setMess}=user;
  
     const updateWidth = () => {
       setWidth(window.innerWidth);
@@ -53,10 +54,11 @@ const Chat=()=> {
       
         const em1= getId(userEmail);
         const em2= getId(user2Email);
-   
       
       console.log("sendre-=--=-=-", senderId+"    "+receiverId+"      ");
       chat(chatId);
+
+  
 
     },[frienddetail])
 
@@ -73,15 +75,25 @@ const Chat=()=> {
 
     useEffect(()=>{
       if(localStorage.getItem('token'))
-      {   console.log(user_name);
+      {
+      console.log(user_name);
           
         friendChat();
        
-        console.log("e3e3");
-        // getId(userEmail)
 
-         
-        console.log("sdfas ",)}
+        console.log("e3e3");
+
+        
+       
+     
+      
+      // setimgurl(imgurl);
+        // getId(userEmail)
+        // console.log("imgurl ",imgurl);
+      
+        
+        
+      }
       else{
         console.log("not logined")
       navigate("/login");
@@ -89,14 +101,17 @@ const Chat=()=> {
       
     },[])
 
-   
+    // useEffect(()=>{
+    //   if(localStorage.getItem('token')){
+    //   console.log("SETIMG CALL ")
+    //   setImg(userEmail);
+    //   }
+    //   else{
+    //     navigate("/login");
+    //   }
+    // },[]);
 
-    //   useEffect(()=>{
    
-    //    friendChat();
-    // },[state])
-
-      
 
     //  socket.emit('privatechatroom', {userEmail});
 
@@ -113,7 +128,11 @@ const Chat=()=> {
             friendChat();
         },[state]);
                 
-
+      //   useEffect(()=>{
+      //     console.log("IMGURL ",imgurl);
+      //     setimgurl(imgurl);
+      // },[imgurl]);
+              
      const onsubmit=async (e)=>{
       
         e.preventDefault();
@@ -147,7 +166,6 @@ const Chat=()=> {
       const moveBack=()=>{
         setback(false);
 
-      
       }
   
   return (
@@ -156,13 +174,14 @@ const Chat=()=> {
             <Navbar></Navbar>
             <div className="bigbox">
         <div className="smallbox">
-            {   (!back || width>750) && <div className="side">
+            {   (!back || width>750) &&  <div className="side">
              
         <div className="about">
             <div className="image">
                 {/* <img src="" id="photo"/>  */}
+            {/* {<img src={imgurl} alt='profile' id="photo"/> } */}
                 
-                <img src="https://static.vecteezy.com/system/resources/previews/008/481/369/original/avatar-cartoon-in-flat-style-png.png" id="photo"></img>
+                {<img src={imgurl} id="photo" alt ='profile'/>}
             </div>
                  
                  <div className="about_name">
@@ -202,7 +221,7 @@ const Chat=()=> {
 
                     {mess.map((note,index)=>{
                        
-            
+                      
                       
                   return <Message key={index} note={note}/>
                   

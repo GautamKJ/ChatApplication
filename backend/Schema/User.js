@@ -18,8 +18,9 @@ const userSchema= new Schema({
     },
     image:
     {   
-        data: Buffer,
-        contentType: String
+        type: String,
+        required:true
+        
     },
     date:{
         type:Date,
