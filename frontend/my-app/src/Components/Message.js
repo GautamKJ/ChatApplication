@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import io from "socket.io-client";
 import { format } from "timeago.js";
 import ChatContext from '../context/chatContext';
-const socket=io.connect('http://localhost:8081');
+const socket=io.connect('http://54.205.121.59:5000');
 const Message=(props)=> {
   const {note}=props;
 

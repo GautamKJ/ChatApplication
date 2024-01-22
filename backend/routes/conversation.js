@@ -10,10 +10,6 @@ const crypto = require("crypto");
 
 const algorithm = "aes-256-cbc"; 
 
-// generate 16 bytes of random data
-
-
-
 // protected data
 
 // secret key generate 32 bytes of random data

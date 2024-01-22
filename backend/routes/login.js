@@ -34,7 +34,8 @@ router.get('/', (req, res) => {
 		}
 		else {
       console.log(items);
-			res.render('imagesPage', { items: items });
+      res.send(items);
+			// res.send('imagesPage', { items: items });
 		}
 	});
 });

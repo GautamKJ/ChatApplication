@@ -10,7 +10,7 @@ const Chat=()=> {
   document.title = "GauShip";
 
   let navigate=useNavigate();
-  // const socket=io.connect('http://localhost:8081');
+  // const socket=io.connect('http://54.205.121.59:5000');
     const user=useContext(ChatContext);
     console.log("context  ",user);
     
@@ -30,7 +30,7 @@ const Chat=()=> {
   });
     useEffect(() => {
       console.log("ME");
-      socket.current = io("http://localhost:8081");
+      socket.current = io("http://54.205.121.59:5000");
 
       socket.current.on("getMessage", (data) => {
         
@@ -79,20 +79,10 @@ const Chat=()=> {
       console.log(user_name);
           
         friendChat();
-       
-
         console.log("e3e3");
-
-        
-       
-     
-      
       // setimgurl(imgurl);
         // getId(userEmail)
         // console.log("imgurl ",imgurl);
-      
-        
-        
       }
       else{
         console.log("not logined")

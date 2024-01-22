@@ -8,10 +8,10 @@ const database= ()=>{
        console.log("Database connected........");
    })
    .catch((err) =>{
-       console.log("no connection");
+       console.log("no connection" +err);
    })
 
-   z
+
 
 }
 module.exports=database;

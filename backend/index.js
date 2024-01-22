@@ -2,9 +2,11 @@
 const express=require('express');
 const database = require('./db');
 const http = require('http');
+const path=require('path');
 var cors = require('cors');
 const fileupload = require("express-fileupload");
-const port=process.env.PORT || 8081;
+const port=process.env.PORT || 5000;
+
 var app= express();
 
 
@@ -19,12 +21,24 @@ app.use(fileupload({
 }));
 
 
+
+
 app.use("/api/login",require("./routes/login"));
 app.use("/api/chat",require("./routes/conversation"));
 app.use("/api/upload",require("./routes/upload"));
 
 let httpServer=http.createServer(app);
 
+
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, '../frontend/my-app/build', 'index.html'));
+});
+
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, '../frontend/my-app/build', 'index.html'));
+});
 // const io = require("socket.io")(8000)
 const io = require('socket.io')(httpServer, {
   

@@ -9,10 +9,10 @@ import io from "socket.io-client";
 import { useEffect } from 'react';
 
 function App() {
-  const socket=io.connect('http://localhost:8081');
+  const socket=io.connect('http://54.205.121.59:5000');
 //   useEffect(() => {
   
-//     const socket = socketIOClient('http://localhost:8081');
+//     const socket = socketIOClient('http://54.205.121.59:5000');
 //     console.log("socket  ",socket );
 //  }, []);
   return (
