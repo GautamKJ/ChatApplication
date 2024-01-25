@@ -28,7 +28,7 @@ const ChatState=(props)=>{
         console.log("user_name   "+user_name);
     const friend=[];
     const [frienddetail,updatefrienddetail]= useState(friend);
-    const host=`http://18.210.61.107`;
+    const host=`https://18.210.61.107`;
 
 //  Fetch all friend list
 
@@ -64,7 +64,7 @@ const friendChat= async()=>{
 // const setImg=async(email)=>{
 //     try {
 //         console.log("............. ",email);
-//       const response=await fetch("http://18.210.61.107/api/login/getloggeddetail",{
+//       const response=await fetch("https://18.210.61.107/api/login/getloggeddetail",{
 //         method:"POST",
 //         headers:{
 //           'content-Type':'application/json',

@@ -7,7 +7,7 @@ const Navbar=() => {
 
   const content=useContext(ChatContext);
   const{userEmail,searchuser,userAdd,newuserAdd}=content;
-  const host=`http://18.210.61.107`;
+  const host=`https://18.210.61.107`;
   const[safe,setSafe]=("1");
   const navigate=useNavigate();
   const [search,setsearch]=useState("");

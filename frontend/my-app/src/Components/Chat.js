@@ -10,7 +10,7 @@ const Chat=()=> {
   document.title = "GauShip";
 
   let navigate=useNavigate();
-  // const socket=io.connect('http://18.210.61.107');
+  // const socket=io.connect('https://18.210.61.107');
     const user=useContext(ChatContext);
     console.log("context  ",user);
     
@@ -30,7 +30,7 @@ const Chat=()=> {
   });
     useEffect(() => {
       console.log("ME");
-      socket.current = io("http://18.210.61.107");
+      socket.current = io("https://18.210.61.107");
 
       socket.current.on("getMessage", (data) => {
         

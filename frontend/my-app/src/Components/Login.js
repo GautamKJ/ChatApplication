@@ -36,7 +36,7 @@ const onsubmit= async(e)=>{
   e.preventDefault();
   
   try {
-    const response=await fetch("http://18.210.61.107/api/login/loginUser",{
+    const response=await fetch("https://18.210.61.107/api/login/loginUser",{
       method:"POST",
       headers:{
         'content-Type':'application/json',
